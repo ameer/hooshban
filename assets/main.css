@@ -1,0 +1,26 @@
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("~/assets/fonts/Vazirmatn[wght].woff2")
+        format("woff2 supports variations"),
+      url("~/assets/fonts/Vazirmatn[wght].woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Vazirmono";
+    src: url("~/assets/fonts/Vazirmatn-FD-NL-Regular.woff2") format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Vazirmono";
+    src: url("~/assets/fonts/Vazirmatn-FD-NL-Bold.woff2") format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  .mono {
+    font-family: "Vazirmono" !important;
+  }

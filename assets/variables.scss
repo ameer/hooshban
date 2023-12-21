@@ -1,0 +1,55 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+//
+// The variables you want to modify
+// $font-size-root: 20px;
+$body-font-family: 'Vazirmatn';
+$btn-letter-spacing: normal;
+$tabs-item-letter-spacing: normal;
+$material-light: (
+  "background": #ebf0f9,
+);
+$container-max-widths: (
+  "lg": 1920px,
+  "xl": 1920px,
+);
+$headings: (
+  "h1": (
+    "letter-spacing": normal,
+  ),
+  "h2": (
+    "letter-spacing": normal,
+  ),
+  "h3": (
+    "letter-spacing": normal,
+  ),
+  "h4": (
+    "letter-spacing": normal,
+  ),
+  "h5": (
+    "letter-spacing": normal,
+  ),
+  "h6": (
+    "letter-spacing": normal,
+  ),
+  "subtitle-1": (
+    "letter-spacing": normal,
+  ),
+  "subtitle-2": (
+    "letter-spacing": normal,
+  ),
+  "body-1": (
+    "letter-spacing": normal,
+  ),
+  "body-2": (
+    "letter-spacing": normal,
+  ),
+  "button": (
+    "letter-spacing": normal,
+  ),
+  "caption": (
+    "letter-spacing": normal,
+  ),
+  "overline": (
+    "letter-spacing": normal,
+  ),
+);

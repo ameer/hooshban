@@ -5,11 +5,20 @@ module.exports = {
     node: true
   },
   parserOptions: {
-    parser: '@babel/eslint-parser',
+
     requireConfigFile: false
   },
-  extends: ['@nuxtjs', 'plugin:nuxt/recommended'],
-  plugins: [],
+  extends: ['@nuxtjs', 'plugin:nuxt/recommended', '@nuxtjs/eslint-config-typescript'],
+  plugins: ['vue', '@typescript-eslint'],
   // add your custom rules here
-  rules: {}
+  rules: {
+    '@typescript-eslint/no-this-alias': [
+      'error',
+      {
+        allowedNames: [
+          'self'
+        ]
+      }
+    ]
+  }
 }

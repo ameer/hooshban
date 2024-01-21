@@ -52,8 +52,62 @@ export const commands: Commands = {
   deleteSingleRemote: {
     s: 'rmd*n', // $n is the remote number 1-10
     args: 1
+  },
+  deleteAllRemotes: {
+    s: 'rmda'
+  },
+  getRemotesReport: {
+    s: 'rm?'
+  },
+  setSingleRemoteLabel: {
+    s: 'rml*$n*$name', // n is the remote number 1-10, name max 15Ch
+    args: 2
+  },
+  setSingleSensor: {
+    s: 'sns*$n',
+    args: 1
+  },
+  deleteSingleSensor: {
+    s: 'snd*n', // $n is the sensor number 1-10
+    args: 1
+  },
+  deleteAllSensors: {
+    s: 'snda'
+  },
+  getSensorsReport: {
+    s: 'sn?'
+  },
+  setSingleSensorLabel: {
+    s: 'snl*$n*$name', // n is the sensor number 1-10, name max 15Ch
+    args: 2
+  },
+  setSirenTime: {
+    s: 'srn*$t', // t is siren uptime in minutes 1-15
+    args: 1
+  },
+  getSirenTime: {
+    s: 'srn?'
+  },
+  setSystemOn: {
+    s: 'on'
+  },
+  setSystemOff: {
+    s: 'off'
+  },
+  setPIRStatus: {
+    s: 'pir*$s', // s is PIR power status 0 = off 1 = on
+    args: 1
+  },
+  getPIRReport: {
+    s: 'pir?'
+  },
+  setZoneStatus: {
+    s: 'zn*$s', // s is zone status 0 = off 1 = NO 2 = NC
+    args: 1
+  },
+  getZoneReport: {
+    s: 'zn?'
   }
-
 }
 
 export function prepareCommand (commandName: keyof typeof commands, ...args: any[]) {
@@ -71,8 +125,7 @@ export function prepareCommand (commandName: keyof typeof commands, ...args: any
 function errorChecker (command: Command | undefined, args: any[]) {
   if (!command) {
     throw new Error('Command Not Found!')
-  }
-  if (command.args !== args.length) {
+  } else if (command.args && command.args !== args.length) {
     throw new Error('Not enough parameters!')
   }
 }

@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'hooshban',
   webDir: 'dist',
   server: {
-    url: 'http://172.17.12.55:3000',
+    url: 'http://192.168.1.94:3000',
     cleartext: true
   }
 }

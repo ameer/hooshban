@@ -13,20 +13,21 @@
     </v-app-bar>
     <div class="flexible-space" />
     <v-main>
-      <v-container>
+      <v-container class="px-0">
         <Nuxt />
       </v-container>
     </v-main>
     <v-bottom-navigation
       :value="1"
       color="primary"
+      background-color="surface"
       grow
       app
       fixed
       shift
       height="74"
     >
-      <v-btn v-for="(item, i) in bnItems" :key="`bn-${i}`" :ripple="false">
+      <v-btn v-for="(item, i) in bnItems" :key="`bn-${i}`" :ripple="false" @click="setPage(item)">
         <span v-text="item.t" />
         <v-icon v-text="item.icon" />
       </v-btn>
@@ -35,6 +36,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { StatusBar } from '@capacitor/status-bar'
 export default {
   name: 'DefaultLayout',
@@ -42,11 +44,11 @@ export default {
     return {
       title: 'هوش‌بان',
       bnItems: [
-        { t: 'رله‌ها', icon: 'mdi-electric-switch', to: '/relays' },
-        { t: 'زون‌ها', icon: 'mdi-alpha-z-box-outline', to: '/zones' },
-        { t: 'مرکز کنترل', icon: 'mdi-dots-hexagon', to: '/' },
-        { t: 'حسگر‌های بی‌سیم', icon: 'mdi-router-wireless', to: '/wireless-sensors' },
-        { t: 'ریموت‌ها', icon: 'mdi-remote', to: '/remotes' }
+        { t: 'رله‌ها', pageName: 'relays', icon: 'mdi-electric-switch' },
+        { t: 'ریموت‌ها', pageName: 'remotes', icon: 'mdi-remote' },
+        { t: 'مرکز کنترل', pageName: 'index', icon: 'mdi-dots-hexagon' },
+        { t: 'حسگر‌های بی‌سیم', pageName: 'wireless-sensors', icon: 'mdi-router-wireless' },
+        { t: 'تنظیمات', pageName: 'settings', icon: 'mdi-cog-outline' }
       ]
     }
   },
@@ -54,8 +56,10 @@ export default {
     StatusBar.setBackgroundColor({ color: '#006250' })
   },
   methods: {
-    onScroll (e) {
-      console.log(e.target.documentElement.scrollTop)
+    ...mapActions(['setPageTitle', 'setCurrentPage']),
+    setPage (item) {
+      this.setPageTitle(item.t)
+      this.setCurrentPage(item.pageName)
     }
   }
 }

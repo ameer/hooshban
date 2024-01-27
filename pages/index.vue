@@ -1,21 +1,22 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" class="text-center" style="position: sticky !important; top: 0px; z-index: 6;">
+  <v-row justify="center" align="center" no-gutters>
+    <v-col cols="12" class="text-center" style="position: sticky !important; top: 17px; z-index: 6;">
       <h3 class="d-inline-block text-body-1 font-weight-bold text-center primary white--text">
-        کنترل پنل دستگاه
+        {{ pageTitle }}
       </h3>
     </v-col>
-    <v-col cols="12" sm="9" md="6" xl="5">
-      <v-card class="rounded-t-xl elevation-0" style="background-color: #ebf0f9;">
-        <v-container>
+    <v-col cols="12" sm="9" md="6" xl="5" class="pt-4">
+      <v-card class="rounded-t-xxl elevation-0" color="surface">
+        <v-container class="pt-12 px-8">
           <v-row justify="center" align="center">
-            <v-col v-for="(item,i) in items" :key="`item-${i}`" cols="6">
-              <v-btn block :loading="item.loading" :ripple="false" @click="sendCommand(item)">
+            <v-col v-for="(item,i) in commandsList" :key="`item-${i}`" cols="12">
+              <action-card :text="item.text" />
+              <!-- <v-btn block :loading="item.loading" :ripple="false" @click="sendCommand(item)">
                 <v-icon v-if="item.icon !== 'mdi-'" right>
                   {{ item.icon }}
                 </v-icon>
                 <span v-text="item.text" />
-              </v-btn>
+              </v-btn> -->
             </v-col>
           </v-row>
         </v-container>
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions'
 import { SMS } from '@awesome-cordova-plugins/sms'
 export default {
@@ -40,6 +42,9 @@ export default {
         { text: 'گزارش شماره تلفن‌ها', command: '', icon: 'mdi-', loading: false }
       ]
     }
+  },
+  computed: {
+    ...mapGetters(['pageTitle', 'commandsList'])
   },
   methods: {
     sendCommand () {

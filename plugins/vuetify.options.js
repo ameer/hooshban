@@ -10,7 +10,8 @@ export default {
     dark: false,
     themes: {
       light: {
-        primary: '#006250'
+        primary: '#006250',
+        surface: '#fafbfe'
       },
       dark: {
         primary: colors.blue.darken2,

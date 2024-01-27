@@ -1,16 +1,16 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12">
-      <h3 class="text-h6 font-weight-bold text-center mt-3">
+    <v-col cols="12" class="text-center" style="position: sticky !important; top: 0px; z-index: 6;">
+      <h3 class="d-inline-block text-body-1 font-weight-bold text-center primary white--text">
         کنترل پنل دستگاه
       </h3>
     </v-col>
     <v-col cols="12" sm="9" md="6" xl="5">
-      <v-card outlined style="background-color: #ebf0f9;">
+      <v-card class="rounded-t-xl elevation-0" style="background-color: #ebf0f9;">
         <v-container>
           <v-row justify="center" align="center">
             <v-col v-for="(item,i) in items" :key="`item-${i}`" cols="6">
-              <v-btn block :loading="item.loading" @click="sendCommand(item)">
+              <v-btn block :loading="item.loading" :ripple="false" @click="sendCommand(item)">
                 <v-icon v-if="item.icon !== 'mdi-'" right>
                   {{ item.icon }}
                 </v-icon>

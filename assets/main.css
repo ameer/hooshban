@@ -1,26 +1,47 @@
+:root {
+  --light-primary: #006250;
+}
 @font-face {
-    font-family: "Vazirmatn";
-    src: url("~/assets/fonts/Vazirmatn[wght].woff2")
-        format("woff2 supports variations"),
-      url("~/assets/fonts/Vazirmatn[wght].woff2") format("woff2-variations");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Vazirmono";
-    src: url("~/assets/fonts/Vazirmatn-FD-NL-Regular.woff2") format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Vazirmono";
-    src: url("~/assets/fonts/Vazirmatn-FD-NL-Bold.woff2") format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-  .mono {
-    font-family: "Vazirmono" !important;
-  }
+  font-family: "Vazirmatn";
+  src: url("~/assets/fonts/Vazirmatn[wght].woff2")
+      format("woff2 supports variations"),
+    url("~/assets/fonts/Vazirmatn[wght].woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmono";
+  src: url("~/assets/fonts/Vazirmatn-FD-NL-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmono";
+  src: url("~/assets/fonts/Vazirmatn-FD-NL-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+html,
+body {
+  scroll-behavior: smooth;
+}
+.mono {
+  font-family: "Vazirmono" !important;
+}
+.flexible-space {
+  height: 184px;
+  top: 56px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  background: var(--light-primary);
+  transition: transform 0.1s ease-in-out;
+  transform: scaleY(1);
+  transform-origin: top center;
+}
+.theme--light.v-btn:hover::before {
+  display: none !important;
+}

@@ -1,100 +1,93 @@
 <template>
-  <v-row justify="center" align="center" no-gutters>
-    <v-col cols="12" class="text-center" style="position: sticky !important; top: 17px; z-index: 6;">
-      <h3 class="d-inline-block text-body-1 font-weight-bold text-center primary white--text">
-        {{ pageTitle }}
-      </h3>
-    </v-col>
-    <v-col cols="12" sm="9" md="6" xl="5" class="pt-4">
-      <v-card class="rounded-t-xxl elevation-0" color="surface">
-        <v-container class="pt-12 px-8">
-          <v-row justify="center" align="center">
-            <v-col v-for="(item,i) in commandsList" :key="`item-${i}`" cols="12">
-              <action-card :text="item.text" />
-              <!-- <v-btn block :loading="item.loading" :ripple="false" @click="sendCommand(item)">
-                <v-icon v-if="item.icon !== 'mdi-'" right>
-                  {{ item.icon }}
-                </v-icon>
-                <span v-text="item.text" />
-              </v-btn> -->
-            </v-col>
-          </v-row>
-        </v-container>
+  <v-row class="fill-height">
+    <v-col cols="12" sm="9" md="6" xl="5" class="d-flex flex-column justify-end fill-height">
+      <v-card class="d-flex flex-column rounded-xxl elevation-3" :class="{'fill-height' : hasDevice}" color="surface">
+        <template v-if="hasDevice">
+          <v-card-text class="d-flex flex-column" style="gap: 16px;">
+            <device-card v-for="(device, i) in devices" :key="`dc-${i}`" v-bind="device" @click="$router.push('/dashboard')" />
+          </v-card-text>
+        </template>
+        <template v-else>
+          <v-card-title class="font-weight-bold">
+            راه‌اندازی
+          </v-card-title>
+          <v-card-text class="text--primary text-body-1" style="line-height: 2em;">
+            <div>کار با اپلیکیشن <strong class="primary--text">هوش‌بان</strong> بسیار ساده است!</div>
+            <div>برای شروع کافیست دستگاه هوشمند خود را به اپلیکیشن اضافه کنید.</div>
+          </v-card-text>
+          <v-form ref="deviceForm" @submit.prevent="submitForm">
+            <v-card-text class="flex-grow-1">
+              <div dir="ltr">
+                <v-text-field
+                  v-model="formData.simNumber"
+                  dir="ltr"
+                  outlined
+                  rounded
+                  maxlength="11"
+                  type="tel"
+                  label="شماره سیم‌کارت داخل دستگاه"
+                  enterkeyhint="next"
+                />
+              </div>
+              <v-text-field
+                v-model="formData.name"
+                outlined
+                rounded
+                label="نام دستگاه"
+                hint="یک نام دلخواه برای دستگاه"
+                placeholder="مثال: دستگاه کارگاه"
+                enterkeyhint="done"
+              />
+            </v-card-text>
+            <v-card-actions class="pb-4">
+              <v-btn
+                ref="submitBtn"
+                type="submit"
+                block
+                rounded
+                color="primary"
+                height="48"
+              >
+                <span class="text-h6 font-weight-bold">
+                  ثبت دستگاه
+                </span>
+              </v-btn>
+            </v-card-actions>
+          </v-form>
+        </template>
       </v-card>
     </v-col>
   </v-row>
 </template>
-
 <script>
-import { mapGetters } from 'vuex'
-import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions'
-import { SMS } from '@awesome-cordova-plugins/sms'
+import { mapGetters, mapActions } from 'vuex'
 export default {
-  name: 'IndexPage',
+  layout: 'startup',
   data () {
     return {
-      items: [
-        { text: 'فعال کردن سیستم', command: '', icon: 'mdi-', loading: false },
-        { text: 'غیرفعال کردن سیستم', command: '', icon: 'mdi-', loading: false },
-        { text: 'گزارش‌گیری', command: '', icon: 'mdi-', loading: false },
-        { text: 'دریافت میزان آنتن‌دهی', command: '', icon: 'mdi-', loading: false },
-        { text: 'دریافت دما و رطوبت', command: '', icon: 'mdi-', loading: false },
-        { text: 'گزارش شماره تلفن‌ها', command: '', icon: 'mdi-', loading: false }
-      ]
+      formData: {
+        simNumber: '',
+        name: ''
+      }
     }
   },
   computed: {
-    ...mapGetters(['pageTitle', 'commandsList'])
+    ...mapGetters('devices', ['hasDevice', 'devices'])
   },
   methods: {
-    sendCommand () {
-      this.checkAndSend('09011482308')
-    },
-    sendSMS (number) {
-      const self = this
-      const message = 'test message' // + '\n' + self.appHash // For next version
-      SMS.send(number, message, { android: { intent: '', slot: self.simCardSlot } })
-        .then(() => {
-          alert('پیامک با موفقیت ارسال شد.')
-        })
-        .catch((err) => {
-          alert('مشکلی در ارسال پیامک به وجود آمده است.' + err)
-        }).finally(() => {
-        })
-    },
-    checkAndSend (number, command) {
-      const self = this
-      const success = function (hasPermission) {
-        if (hasPermission) {
-          self.sendSMS(number, command)
-        } else {
-          AndroidPermissions.requestPermission(AndroidPermissions.PERMISSION.SEND_SMS).then(() => {
-            self.sendSMS(number, command)
-          }).catch((err) => {
-            alert(JSON.stringify(err))
-          }).finally(() => {
-            this.$store.dispatch('watchingForSMS', false)
-          })
-        }
+    ...mapActions('devices', ['addDevice']),
+    async submitForm () {
+      this.$refs.submitBtn.$el.focus()
+      try {
+        await this.addDevice(this.formData)
+        this.$router.push('/dashboard/')
+      } catch (error) {
+        console.log(error)
       }
-      const error = function (err) { this.$toast.error('Something went wrong:' + err); this.$nuxt.$emit(`messageNotReceived-${command.name}`, err) }
-      SMS.hasPermission(success, error)
-    },
-    requestSMSPermission () {
-      const success = function (hasPermission) {
-        if (!hasPermission) {
-          SMS.requestPermission(function () {
-            console.log('[OK] Permission accepted')
-          }, function (error) {
-            console.log(error)
-            console.info('[WARN] Permission not accepted')
-            // Handle permission not accepted
-          })
-        }
-      }
-      const error = function (e) { alert('Something went wrong:' + e) }
-      SMS.hasPermission(success, error)
     }
   }
 }
 </script>
+<style>
+
+</style>

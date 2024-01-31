@@ -11,162 +11,249 @@
 
 export const commands = {
   setPhoneNumber: {
-    s: 'pn*$n*$p', // $n = Memory slot number 1-10 $p = Phone Number, if 0, memory slot will be deleted
+    s: 'pn*$n*$p',
     args: 2,
-    pages: ['settings'],
-    text: 'افزودن شماره تلفن'
+    pages: [
+      'settings'
+    ],
+    text: 'افزودن شماره تلفن',
+    id: 'cmd-0'
   },
   getPhoneNumbers: {
     s: 'pn?',
-    pages: ['settings'],
-    text: 'دریافت لیست مدیران'
+    pages: [
+      'settings'
+    ],
+    text: 'دریافت لیست مدیران',
+    id: 'cmd-1'
   },
   setDevicePassword: {
     s: 'ps*$o*$n',
     args: 2,
-    pages: ['settings'],
-    text: 'تغییر رمز دستگاه'
+    pages: [
+      'settings'
+    ],
+    text: 'تغییر رمز دستگاه',
+    id: 'cmd-2'
   },
   resetToDefaultPassword: {
     s: 'psdf',
-    pages: ['settings'],
-    text: 'بازگردانی رمز پیش‌فرض'
+    pages: [
+      'settings'
+    ],
+    text: 'بازگردانی رمز پیش‌فرض',
+    id: 'cmd-3'
   },
   resetFactory: {
     s: 'rsf',
-    pages: ['settings'],
-    text: 'بازگردانی تنظیمات کارخانه'
+    pages: [
+      'settings'
+    ],
+    text: 'بازگردانی تنظیمات کارخانه',
+    id: 'cmd-4'
   },
   getDeviceStatus: {
     s: 'rp?',
-    pages: ['index'],
-    text: 'گزارش‌گیری'
+    pages: [
+      'index'
+    ],
+    text: 'گزارش‌گیری',
+    id: 'cmd-5'
   },
   getAntennaStatus: {
     s: 'ant?',
-    pages: ['index'],
-    text: 'گزارش آنتن‌دهی'
+    pages: [
+      'index'
+    ],
+    text: 'گزارش آنتن‌دهی',
+    id: 'cmd-6'
   },
   getThermoHumidity: {
     s: 'th?',
-    pages: ['index'],
-    text: 'گزارش دما و رطوبت'
+    pages: [
+      'index'
+    ],
+    text: 'گزارش دما و رطوبت',
+    id: 'cmd-7'
   },
   setRelayStatus: {
     s: 'rly*$s',
     args: 1,
-    pages: ['relays'],
-    text: 'کنترل رله'
+    pages: [
+      'relays'
+    ],
+    text: 'کنترل رله',
+    id: 'cmd-8'
   },
   setRelaySetting: {
-    s: 'rlys*$t', // Relay uptime: 0-200 deciseconds 0 means always on 10 = 1.0 second
+    s: 'rlys*$t',
     args: 1,
-    pages: ['relays'],
-    text: 'تنظیمات رله'
+    pages: [
+      'relays'
+    ],
+    text: 'تنظیمات رله',
+    id: 'cmd-9'
   },
   getRelayStatus: {
     s: 'rly?',
-    pages: ['relays'],
-    text: 'گزارش رله'
+    pages: [
+      'relays'
+    ],
+    text: 'گزارش رله',
+    id: 'cmd-10'
   },
   setSingleRemote: {
-    s: 'rms*$n', // $n is the remote number 1-10
+    s: 'rms*$n',
     args: 1,
-    pages: ['remotes'],
-    text: 'افزودن ریموت'
+    pages: [
+      'remotes'
+    ],
+    text: 'افزودن ریموت',
+    id: 'cmd-11'
   },
   deleteSingleRemote: {
-    s: 'rmd*n', // $n is the remote number 1-10
+    s: 'rmd*n',
     args: 1,
-    pages: ['remotes'],
-    text: 'حذف ریموت'
+    pages: [
+      'remotes'
+    ],
+    text: 'حذف ریموت',
+    id: 'cmd-12'
   },
   deleteAllRemotes: {
     s: 'rmda',
-    pages: ['remotes'],
-    text: 'حذف همه‌ی ریموت‌ها'
+    pages: [
+      'remotes'
+    ],
+    text: 'حذف همه‌ی ریموت‌ها',
+    id: 'cmd-13'
   },
   getRemotesReport: {
     s: 'rm?',
-    pages: ['remotes'],
-    text: 'گزارش ریموت‌ها'
+    pages: [
+      'remotes'
+    ],
+    text: 'گزارش ریموت‌ها',
+    id: 'cmd-14'
   },
   setSingleRemoteLabel: {
-    s: 'rml*$n*$name', // n is the remote number 1-10, name max 15Ch
+    s: 'rml*$n*$name',
     args: 2,
-    pages: ['remotes'],
-    text: 'تنظیم برچسب ریموت'
+    pages: [
+      'remotes'
+    ],
+    text: 'تنظیم برچسب ریموت',
+    id: 'cmd-15'
   },
   setSingleSensor: {
     s: 'sns*$n',
     args: 1,
-    pages: ['wireless-sensors'],
-    text: 'افزودن حسگر بی‌سیم'
+    pages: [
+      'wireless-sensors'
+    ],
+    text: 'افزودن حسگر بی‌سیم',
+    id: 'cmd-16'
   },
   deleteSingleSensor: {
-    s: 'snd*n', // $n is the sensor number 1-10
+    s: 'snd*n',
     args: 1,
-    pages: ['wireless-sensors'],
-    text: 'حذف حسگر بی‌سیم'
+    pages: [
+      'wireless-sensors'
+    ],
+    text: 'حذف حسگر بی‌سیم',
+    id: 'cmd-17'
   },
   deleteAllSensors: {
     s: 'snda',
-    pages: ['wireless-sensors'],
-    text: 'حذف همه‌ی حسگرهای بی‌سیم'
+    pages: [
+      'wireless-sensors'
+    ],
+    text: 'حذف همه‌ی حسگرهای بی‌سیم',
+    id: 'cmd-18'
   },
   getSensorsReport: {
     s: 'sn?',
-    pages: ['wireless-sensors'],
-    text: 'گزارش حسگرهای‌ بی‌سیم'
+    pages: [
+      'wireless-sensors'
+    ],
+    text: 'گزارش حسگرهای‌ بی‌سیم',
+    id: 'cmd-19'
   },
   setSingleSensorLabel: {
-    s: 'snl*$n*$name', // n is the sensor number 1-10, name max 15Ch
+    s: 'snl*$n*$name',
     args: 2,
-    pages: ['wireless-sensors'],
-    text: 'تنظیم برچسب سنسور بی‌سیم'
+    pages: [
+      'wireless-sensors'
+    ],
+    text: 'تنظیم برچسب سنسور بی‌سیم',
+    id: 'cmd-20'
   },
   setSirenTime: {
-    s: 'srn*$t', // t is siren uptime in minutes 1-15
+    s: 'srn*$t',
     args: 1,
-    pages: ['settings'],
-    text: 'تنظیم زمان‌بندی آژیر'
+    pages: [
+      'settings'
+    ],
+    text: 'تنظیم زمان‌بندی آژیر',
+    id: 'cmd-21'
   },
   getSirenTime: {
     s: 'srn?',
-    pages: ['settings'],
-    text: 'دریافت زمان‌بندی آژیر'
+    pages: [
+      'settings'
+    ],
+    text: 'دریافت زمان‌بندی آژیر',
+    id: 'cmd-22'
   },
   setSystemOn: {
     s: 'on',
-    pages: ['index'],
-    text: 'روشن کردن سیستم'
+    pages: [
+      'index'
+    ],
+    text: 'روشن کردن سیستم',
+    id: 'cmd-23'
   },
   setSystemOff: {
     s: 'off',
-    pages: ['index'],
-    text: 'خاموش کردن سیستم'
+    pages: [
+      'index'
+    ],
+    text: 'خاموش کردن سیستم',
+    id: 'cmd-24'
   },
   setPIRStatus: {
-    s: 'pir*$s', // s is PIR power status 0 = off 1 = on
+    s: 'pir*$s',
     args: 1,
-    pages: ['settings'],
-    text: 'روشن/خاموش کردن چشمی'
+    pages: [
+      'settings'
+    ],
+    text: 'روشن/خاموش کردن چشمی',
+    id: 'cmd-25'
   },
   getPIRReport: {
     s: 'pir?',
-    pages: ['settings'],
-    text: 'گزارش وضعیت چشمی'
+    pages: [
+      'settings'
+    ],
+    text: 'گزارش وضعیت چشمی',
+    id: 'cmd-26'
   },
   setZoneStatus: {
-    s: 'zn*$s', // s is zone status 0 = off 1 = NO 2 = NC
+    s: 'zn*$s',
     args: 1,
-    pages: ['settings'],
-    text: 'تعیین وضعیت زون'
+    pages: [
+      'settings'
+    ],
+    text: 'تعیین وضعیت زون',
+    id: 'cmd-27'
   },
   getZoneReport: {
     s: 'zn?',
-    pages: ['settings'],
-    text: 'گزارش وضعیت زون'
+    pages: [
+      'settings'
+    ],
+    text: 'گزارش وضعیت زون',
+    id: 'cmd-28'
   }
 }
 

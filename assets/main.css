@@ -53,3 +53,16 @@ body {
   box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
     rgba(17, 17, 26, 0.1) 0px 0px 8px;
 }
+.fade-out-in-enter-active,
+.fade-out-in-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-out-in-enter-active {
+  transition-delay: 0.3s;
+}
+
+.fade-out-in-enter,
+.fade-out-in-leave-to {
+  opacity: 0;
+}

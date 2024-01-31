@@ -1,5 +1,5 @@
 <template>
-  <v-row class="fill-height">
+  <v-row class="fill-height" justify="center">
     <v-col cols="12" sm="9" md="6" xl="5" class="d-flex flex-column justify-end fill-height">
       <v-card class="d-flex flex-column rounded-xxl elevation-3" :class="{'fill-height' : hasDevice}" color="surface">
         <template v-if="hasDevice">

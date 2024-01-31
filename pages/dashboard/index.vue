@@ -5,14 +5,20 @@
         {{ pageTitle }}
       </h3>
     </v-col>
-    <v-col cols="12" sm="9" md="6" xl="5" class="pt-4">
+    <v-col
+      cols="12"
+      sm="9"
+      md="6"
+      xl="5"
+      class="pt-4"
+    >
       <v-card class="rounded-t-xxl elevation-0" color="surface">
         <v-container class="pt-12 px-8">
-          <v-row justify="center" align="center">
-            <v-col v-for="(item,i) in commandsList" :key="`item-${i}`" cols="12">
+          <transition-group name="fade-out-in" tag="div" class="row justify-center align-center" :style="{ '--total': commandsList.length }">
+            <v-col v-for="(item) in commandsList" :key="item.id" cols="12">
               <action-card :text="item.text" @click="sendCommand(item)" />
             </v-col>
-          </v-row>
+          </transition-group>
         </v-container>
       </v-card>
     </v-col>
